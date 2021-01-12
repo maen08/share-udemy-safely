@@ -5,6 +5,7 @@ import os
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
+from decouple import config
 
 
 
@@ -48,32 +49,21 @@ def index(request):
             emails = driver.find_elements_by_name('identifier') #avoid 'WebElement' has no len() error
             for email in emails:
             
-                email.send_keys('2001stany@gmail.com')
+                EMAIL = config('EMAIL')
+
+                email.send_keys(EMAIL)
                 email.send_keys(Keys.RETURN)
 
-               
+                PASS = config('PASS')
                 driver.implicitly_wait(15)
                 passwords = driver.find_element_by_name('password')
               
 
-                passwords.send_keys('mwanaume')
+                passwords.send_keys(PASS)
                 passwords.send_keys(Keys.RETURN)
 
  
 
-
-
-        # driver2 = webdriver.Chrome(ChromeDriverManager().install())
-        # driver2.get('https://accounts.google.com/signin/v2/challenge/pwd?response_type=permission%20id_token%20code&scope=profile%20email&openid.realm&include_granted_scopes=true&redirect_uri=storagerelay%3A%2F%2Fhttps%2Fwww.udemy.com%3Fid%3Dauth686665&client_id=700206021005-bfren0qj1or8pp5spnn521hos9lm9ll9.apps.googleusercontent.com&ss_domain=https%3A%2F%2Fwww.udemy.com&gsiwebsdk=shim&access_type=offline&flowName=GeneralOAuthFlow&cid=1&navigationDirection=forward&TL=AM3QAYbbT6hE5wXio741mC5MeAKqEXHmYj64zhI4yj33F4InPolCL4ACHm51gQKp')
-
-        # passwords = driver2.find_element_by_name('password')
-        # for password in passwords:
-
-        #     # password = driver.find_element_by_name('password')
-        #     password.send_keys('mwanaume')
-        #     password.send_keys(Keys.RETURN)
-
- 
             
     return render(request, template_name='index.html')
 
