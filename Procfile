@@ -1,0 +1,1 @@
+web: gunicorn SHARE_UDEMY.wsgi:application
